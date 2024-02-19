@@ -1,37 +1,42 @@
-let fetchInterval;
+let socket = null;
 
-function fetchLogs(){
-    fetch('http://localhost:8080/')
-    .then(response => {
-        if(!response.ok){
-            throw new Error('Network response was not ok');
+function createSocketConnection(){
+        if( socket ){
+            return;
         }
-        return response.text();
-    })
-    .then(data => {
-        const messageBox = document.getElementById("messageBox");
-        const paragraph = document.createElement('p');
-        paragraph.textContent = data;
-        messageBox.appendChild(paragraph); 
-    })
-    .catch(error =>{
-        console.error('There was a problem with the fetch operation:', error);
-        document.getElementById('messageBox').innerHTML = 'Failed to load messages.';
-    })
+        
+        socket = new WebSocket('ws://192.168.3.44/ws');     
+        
+        socket.onopen = () => {
+            send_request(socket);
+        };
+        
+        socket.onmessage = function(event){
+            const messageBox = document.getElementById("messageBox");
+            const paragraph = document.createElement('p');
+            paragraph.textContent = event.data;
+            messageBox.appendChild(paragraph); 
+        };
+        
+        // Event handler for when the connection is closed
+        socket.onclose = () => {
+        };
 }
 
-document.getElementById('loadLogsButton').addEventListener('click', function() {
-    if( fetchInterval ){
-        clearInterval(fetchInterval)
-    }
-    fetchLogs();
-    fetchInterval = setInterval(fetchLogs, 1000);
-});
+function send_request(socket){
+    socket.send('Get logs');
+}
+
+document.getElementById('loadLogsButton').addEventListener('click', createSocketConnection);
 
 document.getElementById('clearLogsButton').addEventListener('click', function() {
+    if( socket && (socket.readyState !== WebSocket.CLOSED) || ( socket.readyState !== WebSocket.CLOSING) ){
+        socket.send('Stop logs');
+        socket.close();
+        socket = null;
+    }
     document.getElementById('messageBox').innerHTML = '';
 });
-
 
 document.getElementById('downloadLogsButton').addEventListener('click', function() {
     // Replace 'ws://example.com/websocket' with your WebSocket server URL
@@ -55,3 +60,9 @@ document.getElementById('downloadLogsButton').addEventListener('click', function
    // Remove the <a> element after triggering the download
    document.body.removeChild(downloadLink); 
 });
+
+window.onbeforeunload = function() {
+    // Close the WebSocket connection
+    socket.send('Stop logs');
+    socket.close();
+};
