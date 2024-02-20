@@ -21,6 +21,10 @@ h1 {
     margin-right: auto;
 }
 
+p {
+  font-size: 8px; /* Set font size for log text */
+}
+
 form {
     display: flex;
     flex-direction: column;
