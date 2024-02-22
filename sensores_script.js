@@ -1,5 +1,9 @@
+var temperatureGauge;
+var humidityGauge; 
+var updateTime = 2000;
+
 document.addEventListener("DOMContentLoaded", function(event) {
-  var temperatureGauge = new JustGage({
+  temperatureGauge = new JustGage({
       id: "temperatureGauge",
       value: 24, // Sample value, replace with actual data
       min: 0,
@@ -10,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       labelMinFontSize : 18,
     });
 
-  var humidityGauge = new JustGage({
+  humidityGauge = new JustGage({
       id: "humidityGauge",
       value: 40, // Sample value, replace with actual data
       min: 0,
@@ -21,5 +25,32 @@ document.addEventListener("DOMContentLoaded", function(event) {
       labelMinFontSize : 18,
   });
 
-  // Here, you can add code to update these gauges with real-time data if needed.
 });
+
+//Function to request temperature data
+function updateGauge(){
+  fetch('http://localhost:8080/sensor_tmp')
+    .then( response => {
+      return response.text()
+    })
+    .then(data => {
+      temperatureGauge.refresh(data);
+    })
+    .catch(error => console.error('Error while fetching data: ',error));
+}
+
+
+//Function to request humidity data
+function updateGaugeH(){
+  fetch('http://localhost:8080/sensor_humi')
+    .then( response => {
+      return response.text()
+    })
+    .then(data => {
+      humidityGauge.refresh(data);
+    })
+    .catch(error => console.error('Error while fetching data: ',error));
+}
+
+setInterval(updateGauge, updateTime);
+setInterval(updateGaugeH,updateTime);
