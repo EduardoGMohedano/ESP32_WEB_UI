@@ -1,9 +1,8 @@
 // Fetch the menu HTML and include it in the page
 const headerTexts = {
     'index.html': 'Home Page',
-    'logs.html': 'ESP32 System logs',
-    'fw_update.html': 'Firmware Updates',
-    'history.html': 'Updates History',
+    'sensores.html': 'Sensores',
+    'iluminacion.html': 'Iluminacion',
     // Add more mappings as needed
 };
 
