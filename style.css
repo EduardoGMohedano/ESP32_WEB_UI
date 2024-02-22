@@ -273,3 +273,37 @@ img {
   margin-top: 320px;
   text-align: right;
 }
+
+
+/*Light bulb style for button to control digital output*/
+.light-bulb-off, .light-bulb-on {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+
+.bulb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bulb-top {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+
+.bulb-bottom {
+    width: 10px;
+    height: 20px;
+    background-color: #999;
+    margin-top: -5px;
+}
+
+.light-bulb-on .bulb-top {
+    background-color: #ffeb3b; /* Light yellow to indicate the bulb is on */
+    box-shadow: 0 0 8px #ffeb3b, 0 0 12px #ffeb3b; /* Adding glow effect */
+}
