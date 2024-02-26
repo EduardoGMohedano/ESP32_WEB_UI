@@ -39,7 +39,6 @@ function updateGauge(){
     .catch(error => console.error('Error while fetching data: ',error));
 }
 
-
 //Function to request humidity data
 function updateGaugeH(){
   fetch('http://192.168.3.44/sensor?type=humi')
