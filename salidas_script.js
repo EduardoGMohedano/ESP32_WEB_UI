@@ -12,7 +12,7 @@ function toggleLight(bulb) {
         body : bulb_state ? '1' : '0',
     })
     .then( response => {
-      return response.text()
+      return response.text();
     })
     .then(data => {
         console.log("Success sending POST request");

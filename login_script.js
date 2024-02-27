@@ -15,20 +15,19 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         method: 'POST',
         mode: 'no-cors', //temporary setting to get data from server board
         headers: {'Content-Type': 'application/json'},
-        body : JSON.stringify(auth_data),
+        body :JSON.stringify(auth_data),
     })
-    .then( response => response.json())
+    .then( response => {
+        return response.json();
+    }) 
+    .then( data => {
+        if( data["response"] === "ESP_OK"){
+            alert('Login successful!');
+            window.location.href = 'home.html'
+        }
+        else
+            alert('Invalid user or password!');
+    })
     .catch(error => console.error('Error while fetching data: ',error));
-
-
-    //how to authenticate this with the status of the http response?????
-    if(username === 'admin' && password === 'password') {
-        // Success: In a real application, you might redirect or show a success message
-        alert('Login successful!');
-        window.location.href = 'home.html'
-    } else {
-        // Error: Show an error message
-        errorMessage.innerText = 'Invalid username or password';
-        errorMessage.style.color = 'red';
-    }
+    
 });
