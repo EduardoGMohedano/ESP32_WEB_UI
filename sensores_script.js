@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 //Function to request temperature data
 function updateGauge(){
-  fetch('http://192.168.3.44/sensor?type=temp')
+  fetch('http://esp-home.local/sensor?type=temp')
     .then( response => {
       return response.text()
     })
@@ -41,7 +41,7 @@ function updateGauge(){
 
 //Function to request humidity data
 function updateGaugeH(){
-  fetch('http://192.168.3.44/sensor?type=humi')
+  fetch('http://esp-home.local/sensor?type=humi')
     .then( response => {
       return response.text()
     })

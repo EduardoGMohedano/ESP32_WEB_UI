@@ -5,7 +5,7 @@ function toggleLight(bulb) {
     bulb_state = !bulb_state;
     console.log("The bulb state is ", bulb_state);
     //fetch('http://192.168.3.44/output?type=temp')
-    fetch('http://192.168.3.44/output',{
+    fetch('http://esp-home.local/output',{
         method: 'POST',
         mode: 'no-cors', //temporary setting to get data from server board
         headers: {'Content-Type': 'text/html'},

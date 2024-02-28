@@ -11,7 +11,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         'pass': hashedpasword
     };
 
-    fetch('http://192.168.3.44/authentication',{
+    fetch('http://esp-home.local/authentication',{
         method: 'POST',
         mode: 'no-cors', //temporary setting to get data from server board
         headers: {'Content-Type': 'application/json'},
