@@ -5,24 +5,30 @@ var updateTime = 2000;
 document.addEventListener("DOMContentLoaded", function(event) {
   temperatureGauge = new JustGage({
       id: "temperatureGauge",
-      value: 24, // Sample value, replace with actual data
+      value: 24.5, // Sample value, replace with actual data
       min: 0,
       max: 50,
       title: "Temperatura",
       label: "Temperatura °C",
-      valueMinFontSize : 30,
+      valueMinFontSize : 26,
       labelMinFontSize : 18,
+      minLabelMinFontSize: 18,
+      maxLabelMinFontSize: 18,
+      decimals: 1,
     });
 
   humidityGauge = new JustGage({
       id: "humidityGauge",
-      value: 40, // Sample value, replace with actual data
+      value: 40.2, // Sample value, replace with actual data
       min: 0,
       max: 100,
       title: "Humedad",
       label: "Humedad %",
-      valueMinFontSize : 30,
+      valueMinFontSize : 26,
       labelMinFontSize : 18,
+      minLabelMinFontSize: 18,
+      maxLabelMinFontSize: 18,
+      decimals: 1,
   });
 
 });

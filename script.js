@@ -1,6 +1,6 @@
 // Fetch the menu HTML and include it in the page
 const headerTexts = {
-    'home.html': 'Home Page',
+    'home.html': 'Pagina de bienvenida',
     'sensores.html': 'Sensores',
     'iluminacion.html': 'Iluminacion',
     // Add more mappings as needed
